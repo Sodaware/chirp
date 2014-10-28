@@ -5,11 +5,19 @@
 </head>
 <body>
 
-  <div>Header</div>
+<header class="site-header">
   
-  <%= @ body %>
+  <h1><a href="/">Chirp</a></h1>
+  
+  <span class="identity">
+    <a href="/login">Login</a>
+  </span>
+  
+</header>
 
-  <div>Footer</div>
-  
+<div class="site-content">
+  <%= @ body %>
+</div>
+
 </body>
 </html>

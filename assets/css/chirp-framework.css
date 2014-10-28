@@ -1,3 +1,40 @@
 body {
-    font-family: ubuntu;
+    font-family: monospace;
+    margin: 0; padding: 0;
 }
+
+header.site-header {
+    background: #999;
+    overflow: hidden;
+    padding: 1em;
+}
+
+    header.site-header a {
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    header.site-header h1 {
+        font-size: 1em;
+        margin: 0;
+        float: left;
+        font-weight: bold;
+    }
+    
+header.site-header .identity {
+    float: right;
+}
+
+    header.site-header .identity a {
+        border-bottom: 1px solid #fff;
+    }
+
+.site-content {
+    padding: 1em;
+}
+
+    .site-content a {
+        color: #369;
+        text-decoration: none;
+        border-bottom: 1px solid #369;
+    }
