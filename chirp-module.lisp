@@ -5,11 +5,16 @@
 
 (in-package #:chirp)
 
+;; Configuration
+
 (defparameter *template-directory*
   (merge-pathnames #P"templates/" chirp-config:*base-directory*))
 
 (defparameter *asset-directory*
   (merge-pathnames #P"assets/" chirp-config:*base-directory*))
+
+
+;; Helper functions
 
 (defun chirp-render-template (name params)
   (with-open-file (template-file name)
@@ -21,5 +26,10 @@
   (let ((view (concatenate 'string "templates/" name ".html.clt")))
     (chirp-render-template "templates/layout.html.clt"
                            (list :body (chirp-render-template view params)))))
+
+;; Allow restas to publish static assets under /assets/
+(restas:mount-module -assets- (#:restas.directory-publisher)
+                     (:url "/assets/")
+                     (restas.directory-publisher:*directory* *asset-directory*))
 
 (setq *show-lisp-errors-p* t)

@@ -7,6 +7,6 @@
                 :description "A common lisp Twitter clone"
                 :author "Phil Newton"
                 :license "GPL 3.0"
-                :depends-on (:RESTAS :CL-TEMPLATE)
+                :depends-on (:RESTAS :CL-TEMPLATE :restas-directory-publisher)
                 :components ((:file "chirp-module")
                              (:file "chirp")))
