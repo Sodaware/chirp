@@ -1,7 +1,7 @@
 (restas:define-module
  #:chirp
  (:use :cl :restas)
- (:export #:chirp-render-template))
+ (:export #:chirp-render-view))
 
 (in-package #:chirp)
 
@@ -16,5 +16,10 @@
                   (let ((template (make-string (file-length template-file))))
                     (read-sequence template template-file)
                     (funcall (cl-template:compile-template template) params))))
+
+(defun chirp-render-view (name params)
+  (let ((view (concatenate 'string "templates/" name ".html.clt")))
+    (chirp-render-template "templates/layout.html.clt"
+                           (list :body (chirp-render-template view params)))))
 
 (setq *show-lisp-errors-p* t)

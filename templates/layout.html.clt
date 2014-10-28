@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+  
+</head>
+<body>
+
+  <div>Header</div>
+  
+  <%= @ body %>
+
+  <div>Footer</div>
+  
+</body>
+</html>
