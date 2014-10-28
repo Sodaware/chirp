@@ -13,6 +13,3 @@
  homepage ("")
  (chirp-render-view "index" (list :text "Hello, world!")))
 
-;; Start chirp on 8080 (so nginx can proxy it)
-;;(start '#:chirp-app :port 8080)
-
