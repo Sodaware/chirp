@@ -11,7 +11,6 @@
 ;; Set up some routes
 (restas:define-route
  homepage ("")
- (print "HERE!")
  (chirp-render-view "index" (list :text "Hello, world!")))
 
 ;; Start chirp on 8080 (so nginx can proxy it)
