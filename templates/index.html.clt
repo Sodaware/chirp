@@ -3,3 +3,16 @@
 <a href="/">This is a link</a>
 
 <%= @ text %>
+
+<ul class="chirps">
+  
+  <% loop for chirp in (@ chirps) do %>
+    <li><%= chirp %></li>
+  <% end %>
+
+</ul>
+
+<form method="POST" action="/chirps/">
+  <textarea name="content"></textarea>
+  <input type="submit" value="Chirp This" />
+</form>
