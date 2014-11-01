@@ -18,9 +18,9 @@
 
 (defun chirp-render-template (name params)
   (with-open-file (template-file name)
-                  (let ((template (make-string (file-length template-file))))
-                    (read-sequence template template-file)
-                    (funcall (cl-template:compile-template template) params))))
+    (let ((template (make-string (file-length template-file))))
+      (read-sequence template template-file)
+      (funcall (cl-template:compile-template template) params))))
 
 (defun chirp-render-view (name params)
   (let ((view (concatenate 'string "templates/" name ".html.clt")))
