@@ -3,10 +3,11 @@
   (make-pathname :name nil :type nil :defaults *load-truename*))
 
 (asdf:defsystem #:chirp
-                :serial t
-                :description "A common lisp Twitter clone"
-                :author "Phil Newton"
-                :license "GPL 3.0"
-                :depends-on (:RESTAS :CL-TEMPLATE :restas-directory-publisher)
-                :components ((:file "chirp-module")
-                             (:file "chirp")))
+    :serial t
+    :description "A common lisp Twitter clone"
+    :author "Phil Newton"
+    :license "GPL 3.0"
+    :depends-on (:restas :cl-template :restas-directory-publisher :cl-json
+                         :clsql :clsql-sqlite3)
+    :components ((:file "chirp-module")
+                 (:file "chirp")))
