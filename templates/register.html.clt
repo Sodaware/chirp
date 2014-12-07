@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>*chirp*</title>
+  <title>register account -- *chirp*</title>
   <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
 </head>
 
@@ -12,9 +12,9 @@
   <h1><a href="/">*chirp*</a></h1>
   
   <span class="identity">
-    <a href="/login">Login</a>
+    <a href="/login/">Login</a>
     &nbsp;
-    <a href="/register">Register</a>
+    <a href="/register/">Register</a>
   </span>
   
 </header>
@@ -25,23 +25,26 @@
     <h2>*chirp* is a social network written in Common Lisp</h2>
   </div>
 
-  <div class="login-box centered-box box">
+  <div class="register-box centered-box box">
     <header>
-      <h3>Login</h3>
+      <h3>Register</h3>
     </header>
 
-    <form action="/login" method="POST">
+    <form action="/register/" method="POST">
       
       <dl>
         <dt><label>Username</label></dt>
-        <dd><input type="text" /></dd>
+        <dd><input type="text" name="username" /></dd>
         
         <dt><label>Password</label></dt>
-        <dd><input type="text" /></dd>
+        <dd><input type="text" name="password" /></dd>
+
+        <dt><label><em>Confirm</em></label></dt>
+        <dd><input type="text" name="confirm" /></dd>
       </dl>
 
       <p class="button-container">
-        <input type="submit" class="button submit" value="login">
+        <input type="submit" class="button submit" value="Register">
       </p>
       
     </form>
@@ -49,7 +52,7 @@
   </div>
 
   <p class="no-account">
-    No account? <a href="/register">Create one!</a>
+    Have an account? <a href="/login/">Login!</a>
   </p>
 
 </div>

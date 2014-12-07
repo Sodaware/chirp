@@ -103,19 +103,19 @@ input[type='text'] {
     background: #aaa;
 }
 
-.login-box {
+.centered-box {
     width: 25%;
     margin: auto;
     border-bottom: 1px solid #eee;
 }
 
-.login-box dt {
+.centered-box dt {
     float: left;
     width: 20%;
     margin-bottom: 0.25em;
 }
 
-.login-box dd {
+.centered-box dd {
     float: right;
     width: 70%;
     margin-bottom: 0.25em;
