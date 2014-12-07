@@ -30,6 +30,16 @@
       <h3>Register</h3>
     </header>
 
+    <% when (@ errors) %>
+      <div class="errors">
+        <ul>
+          <% loop for error in (@ errors) do %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% ) %>
+    
     <form action="/register/" method="POST">
       
       <dl>
