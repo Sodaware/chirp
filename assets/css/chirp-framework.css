@@ -131,3 +131,14 @@ input[type='text'] {
     margin: 1em auto;
     text-align: right;
 }
+
+.errors {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 0.5em;
+    color: #900;   
+}
+
+    .errors ul {
+        list-style: none;
+        margin: 0; padding: 0;
+    }
