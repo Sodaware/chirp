@@ -38,3 +38,96 @@ header.site-header .identity {
         text-decoration: none;
         border-bottom: 1px solid #369;
     }
+
+.site-content.centered {
+    margin: auto;
+    width: 80%;
+}
+
+.about {
+    margin: 5% 0;
+}
+
+    .about h2 {
+        text-align: center;
+    }
+
+.box.left {
+    float: left;
+    width: 49%;
+}
+
+.box.right {
+    float: right;
+    width: 49%;
+}
+
+.box header h3 {
+    padding: 0.5em;
+    background: #eee;
+}
+
+form dl {
+    overflow: hidden;
+}
+
+form dl dd, form dl dt {
+    margin: 0;
+    padding: 0.5em;
+}
+
+input, textarea {
+    font-family: monospace;
+}
+
+label {
+    padding: 0.25em;
+    display: block;
+}
+
+input[type='text'] {
+    border: 1px solid #999;
+    padding: 0.25em;
+    width: 95%;
+}
+
+.button {
+    background: #999;
+    color: #fff;
+    border: 0;
+    padding: 0.25em;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #aaa;
+}
+
+.login-box {
+    width: 25%;
+    margin: auto;
+    border-bottom: 1px solid #eee;
+}
+
+.login-box dt {
+    float: left;
+    width: 20%;
+    margin-bottom: 0.25em;
+}
+
+.login-box dd {
+    float: right;
+    width: 70%;
+    margin-bottom: 0.25em;
+}
+
+.button-container {
+    padding: 0.25em;
+    text-align: right;
+}
+
+.no-account {
+    width: 25%;
+    margin: 1em auto;
+    text-align: right;
+}
