@@ -47,10 +47,10 @@
         <dd><input type="text" name="username" /></dd>
         
         <dt><label>Password</label></dt>
-        <dd><input type="text" name="password" /></dd>
+        <dd><input type="password" name="password" /></dd>
 
         <dt><label><em>Confirm</em></label></dt>
-        <dd><input type="text" name="confirm" /></dd>
+        <dd><input type="password" name="confirm" /></dd>
       </dl>
 
       <p class="button-container">
