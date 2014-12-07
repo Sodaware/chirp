@@ -29,7 +29,17 @@
     <header>
       <h3>Login</h3>
     </header>
-
+    
+    <% when (@ errors) %>
+      <div class="errors">
+        <ul>
+          <% loop for error in (@ errors) do %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% ) %>
+    
     <form action="/login/" method="POST">
       
       <dl>

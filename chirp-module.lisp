@@ -14,6 +14,53 @@
   (merge-pathnames #P"assets/" chirp-config:*base-directory*))
 
 
+;; Models
+
+(defclass user ()
+  ((id :initform 0)
+   (username :initarg :username
+             :accessor username)
+   (password :initarg :password
+             :reader user-password)
+   (email :initform "")
+   (description :initform "")
+   (photo :initform "")
+   (homepage :initform "")
+   (created-at :initform "")
+   (last-sign-in :initform "")))
+
+(defclass chirp ()
+  ((id :initform 0)
+   (text :initarg :text)
+   (created-at :initform "")
+   (user-id :initarg :user-id)))
+
+(defun register-user (username password)
+  "Create a new user with USERNAME and hashed PASSWORD"
+  (let* ((hashed-password (hash-password password))
+         (user (make-instance 'user :username username :password hashed-password)))
+    (push user *users*)))
+
+(defun authorize-user (username password)
+  (let ((user (username-exists? username)))
+    (if (and user (string= (hash-password password) (user-password user)))
+        user
+        nil)))
+
+(defun hash-password (password)
+  (ironclad:byte-array-to-hex-string 
+   (ironclad:digest-sequence 
+    :sha256 
+    (ironclad:ascii-string-to-byte-array password))))
+
+(defun username-exists? (username)
+  "Check if USERNAME exists in the database."
+  (find username *users* :test #'username-equal
+        :key #'username))
+
+(defun username-equal (username value)
+  (string= (string-downcase username) (string-downcase value)))
+
 ;; Helper functions
 
 (defun chirp-render-template (name params)
