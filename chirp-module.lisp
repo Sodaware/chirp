@@ -25,7 +25,8 @@
 (defun chirp-render-view (name params)
   (let ((view (concatenate 'string "templates/" name ".html.clt")))
     (chirp-render-template "templates/layout.html.clt"
-                           (list :body (chirp-render-template view params)))))
+                           (list :title "*chirp*"
+                                 :body (chirp-render-template view params)))))
 
 ;; Allow restas to publish static assets under /assets/
 (restas:mount-module -assets- (#:restas.directory-publisher)
