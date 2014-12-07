@@ -1,7 +1,11 @@
 (restas:define-module
- #:chirp
- (:use :cl :restas)
- (:export #:chirp-render-view))
+    #:chirp
+    (:use :cl :restas)
+  (:export #:chirp-render-view
+           #:user-logged-in?
+           #:current-user
+           #:user-username
+           #:user-homepage))
 
 (in-package #:chirp)
 
@@ -19,13 +23,14 @@
 (defclass user ()
   ((id :initform 0)
    (username :initarg :username
-             :accessor username)
+             :accessor user-username)
    (password :initarg :password
              :reader user-password)
    (email :initform "")
    (description :initform "")
    (photo :initform "")
-   (homepage :initform "")
+   (homepage :initform ""
+             :accessor user-homepage)
    (created-at :initform "")
    (last-sign-in :initform "")))
 
@@ -34,6 +39,17 @@
    (text :initarg :text)
    (created-at :initform "")
    (user-id :initarg :user-id)))
+
+(defun user-logged-in? ()
+  "Check if a user is logged in."
+  (not (null (hunchentoot:session-value :username))))
+
+(defun user-profile-page (user)
+  (concatenate "/profiles/" (string-downcase (user-username user)) "/"))
+
+(defun current-user ()
+  "Get the currently logged in user object."
+  (username-exists? (hunchentoot:session-value :username)))
 
 (defun register-user (username password)
   "Create a new user with USERNAME and hashed PASSWORD"
@@ -48,6 +64,7 @@
         nil)))
 
 (defun hash-password (password)
+  "Generates a hash for PASSWORD."
   (ironclad:byte-array-to-hex-string 
    (ironclad:digest-sequence 
     :sha256 
@@ -56,7 +73,7 @@
 (defun username-exists? (username)
   "Check if USERNAME exists in the database."
   (find username *users* :test #'username-equal
-        :key #'username))
+        :key #'user-username))
 
 (defun username-equal (username value)
   (string= (string-downcase username) (string-downcase value)))

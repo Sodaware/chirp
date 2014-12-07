@@ -15,7 +15,10 @@
 ;; Display the homepage. If not signed in, the visitor will be shown the login
 ;; screen, otherwise they will see their timeline.
 (restas:define-route homepage ("")
-  (chirp-render-template "templates/homepage.html.clt" nil))
+  (if (user-logged-in?)
+      (progn
+        (chirp-render-view "timeline" (list :user (current-user))))
+      (chirp-render-template "templates/homepage.html.clt" nil)))
 
 ;; Display a list of ALL chirps, not just from people the current user is
 ;; following
@@ -35,6 +38,10 @@
   (setf (hunchentoot:content-type*) "application/json")
   (json:encode-json-to-string *chirps*))
 
+(restas:define-route users/self ("/me/")
+  (if (user-logged-in?)
+      (redirect "/profiles/sodaware/")
+      (redirect 'users/login)))
 
 (restas:define-route users/register ("/register/" :method :get)
   (chirp-render-template "templates/register.html.clt" (list :errors nil :username nil)))
@@ -49,7 +56,10 @@
                                (hunchentoot:post-parameter "password")))
 
     (if user
-        (redirect 'homepage)
+        (progn
+          (hunchentoot:start-session)
+          (setf (hunchentoot:session-value :username) (user-username user))
+          (redirect 'homepage))
         (progn
           (push "Username/password incorrect" errors)
           (chirp-render-template "templates/login.html.clt"

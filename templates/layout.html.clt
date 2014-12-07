@@ -1,19 +1,47 @@
 <!doctype html>
 <html>
 <head>
+  <title><%= @ title %></title>
   <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
 </head>
 <body>
 
 <header class="site-header">
   
-  <h1><a href="/">*Chirp*</a></h1>
+  <h1><a href="/">*chirp*</a></h1>
   
   <span class="identity">
-    <a href="/login">Login</a>
+    <% if (chirp:user-logged-in?) %>
+      Logged in as <a href="/me/"><%= chirp:user-username (chirp:current-user) %></a>
+    <% else %>
+      <a href="/login/">Login</a>
+      &nbsp;
+      <a href="/register/">Register</a>
+    <% end %>
   </span>
   
 </header>
+
+<div class="site-navigation sidebar">
+  
+  <div class="box logged-out">
+    <header>
+      <h3>Your Profile</h3>
+    </header>
+    <p>
+      <a href="/login">Login</a> or <a href="/register">register</a> to join in.
+    </p>
+  </div>
+  
+  <div class="box profile">
+    <header>
+      <h3>@username</h3>
+      <span class="location">Location, Country</span>
+      <span class="image"><span class="empty"></span></span>
+    </header>
+  </div>
+
+</div>
 
 <div class="site-content">
   <%= @ body %>
