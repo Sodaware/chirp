@@ -40,12 +40,12 @@
    (created-at :initform "")
    (user-id :initarg :user-id)))
 
+
+;; User functions
+
 (defun user-logged-in? ()
   "Check if a user is logged in."
   (not (null (hunchentoot:session-value :username))))
-
-(defun user-profile-page (user)
-  (concatenate "/profiles/" (string-downcase (user-username user)) "/"))
 
 (defun current-user ()
   "Get the currently logged in user object."
@@ -58,17 +58,11 @@
     (push user *users*)))
 
 (defun authorize-user (username password)
+  "Check that USERNAME can login with PASSWORD."
   (let ((user (username-exists? username)))
     (if (and user (string= (hash-password password) (user-password user)))
         user
         nil)))
-
-(defun hash-password (password)
-  "Generates a hash for PASSWORD."
-  (ironclad:byte-array-to-hex-string 
-   (ironclad:digest-sequence 
-    :sha256 
-    (ironclad:ascii-string-to-byte-array password))))
 
 (defun username-exists? (username)
   "Check if USERNAME exists in the database."
@@ -76,9 +70,24 @@
         :key #'user-username))
 
 (defun username-equal (username value)
+  "Ignore case and check if USERNAME equals VALUE."
   (string= (string-downcase username) (string-downcase value)))
 
+
+;; Path helpers
+
+(defun user-profile-page-path (user)
+  (concatenate "/profiles/" (string-downcase (user-username user)) "/"))
+
+
 ;; Helper functions
+
+(defun hash-password (password)
+  "Generates a hash for PASSWORD."
+  (ironclad:byte-array-to-hex-string 
+   (ironclad:digest-sequence 
+    :sha256 
+    (ironclad:ascii-string-to-byte-array password))))
 
 (defun chirp-render-template (name params)
   (with-open-file (template-file name)
