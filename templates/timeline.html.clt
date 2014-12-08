@@ -1,0 +1,23 @@
+<div class="box chirp-this">
+  
+  <form method="POST" action="/chirps/">
+    <textarea name="content" rows="1"></textarea>
+
+    <p class="button-container left">
+      <input type="submit" class="button submit" value="Chirp This" />
+    </p>
+  </form>
+
+</div>
+
+<div class="timeline">
+
+  <ul class="chirps">
+  
+    <% loop for chirp in (@ chirps) do %>
+      <li><%= chirp %></li>
+    <% end %>
+
+  </ul>
+
+</div>

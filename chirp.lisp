@@ -17,7 +17,8 @@
 (restas:define-route homepage ("")
   (if (user-logged-in?)
       (progn
-        (chirp-render-view "timeline" (list :user (current-user))))
+        (chirp-render-view "timeline" (list :user (current-user)
+                                            :chirps *chirps*)))
       (chirp-render-template "templates/homepage.html.clt" nil)))
 
 ;; Display a list of ALL chirps, not just from people the current user is
