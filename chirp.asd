@@ -8,5 +8,6 @@
     :author "Phil Newton"
     :license "GPL 3.0"
     :depends-on (:restas :cl-template :restas-directory-publisher :cl-json :ironclad)
+    :pathname "src"
     :components ((:file "chirp-module")
                  (:file "chirp")))
