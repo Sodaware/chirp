@@ -126,6 +126,10 @@ input[type='text'], input[type='password'] {
     text-align: right;
 }
 
+.button-container.left {
+    text-align: left;
+}
+
 .no-account {
     width: 25%;
     margin: 1em auto;
@@ -142,3 +146,26 @@ input[type='text'], input[type='password'] {
         list-style: none;
         margin: 0; padding: 0;
     }
+
+
+.site-navigation.sidebar {
+    float: left;
+    width: 20%;
+    margin: 1% 2%;
+}
+
+.logged-in .site-content {
+    float: left;
+    margin: 1% 0;
+    width: 74%;
+}
+
+.chirp-this {
+    border-bottom: 2px solid #eee;
+}
+
+.chirp-this textarea {
+    border: 1px solid #999;
+    padding: 0.25em;
+    width: 100%;
+}
