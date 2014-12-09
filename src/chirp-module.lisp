@@ -103,7 +103,7 @@
 ;; Path helpers
 
 (defun user-profile-page-path (user)
-  (concatenate "/profiles/" (string-downcase (user-username user)) "/"))
+  (format nil "/profiles/~(~a~)/" (string-downcase (user-username user))))
 
 
 ;; Helper functions

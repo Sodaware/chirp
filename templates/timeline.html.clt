@@ -20,7 +20,7 @@
           <img src="https://secure.gravatar.com/avatar/bb4f45f70feba1d776d4a8f60e7efd0f.jpg?s=32" />
         </span>
         <span class="username">
-          <a href="/profiles/<%= string-downcase (chirp:user-username (chirp:chirp-author chirp)) %>/">
+          <a href="<%= chirp:user-profile-page-path (chirp:chirp-author chirp) %>">
             @<%= chirp:user-username (chirp:chirp-author chirp) %>
           </a>
         </span>
