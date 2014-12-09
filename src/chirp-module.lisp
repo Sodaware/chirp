@@ -6,10 +6,14 @@
            #:current-user
            #:user-username
            #:user-homepage
+           #:user-description
+           #:user-photo
            #:chirp-text
            #:chirp-id
            #:chirp-user-id
-           #:chirp-created-at))
+           #:chirp-created-at
+           #:chirp-author
+           #:user-profile-page-path))
 
 (in-package #:chirp)
 
@@ -52,6 +56,10 @@
                  :user-id (user-id author)
                  :created-at (get-universal-time)))
 
+(defun chirp-author (chirp)
+  "Get the user object for CHIRP"
+  (get-user-by-id (chirp-user-id chirp)))
+
 ;; User functions
 
 (defun user-logged-in? ()
@@ -81,6 +89,11 @@
   "Check if USERNAME exists in the database."
   (find username *users* :test #'username-equal
         :key #'user-username))
+
+(defun get-user-by-id (user-id)
+  "Get a user by their USER-ID."
+  (find user-id *users* :test #'eq
+        :key #'user-id))
 
 (defun username-equal (username value)
   "Ignore case and check if USERNAME equals VALUE."

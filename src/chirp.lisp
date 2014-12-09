@@ -39,6 +39,15 @@
   (setf (hunchentoot:content-type*) "application/json")
   (json:encode-json-to-string *chirps*))
 
+
+;; User stuff
+
+(restas:define-route users/show ("/profiles/:username/")
+  (let ((user (username-exists? username)))
+    (if user
+        (chirp-render-view "users/show" (list :user user))
+        (chirp-render-template "templates/404.html.clt" nil))))
+
 (restas:define-route users/self ("/me/")
   (if (user-logged-in?)
       (redirect "/profiles/sodaware/")

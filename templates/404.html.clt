@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <title>file not found - *chirp*</title>
+  <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
+</head>
+
+<body class="homepage">
+
+<header class="site-header">
+  
+  <h1><a href="/">*chirp*</a></h1>
+
+  <span class="identity">
+    <% if (chirp:user-logged-in?) %>
+      Logged in as <a href="/me/"><%= chirp:user-username (chirp:current-user) %></a>
+    <% else %>
+      <a href="/login/">Login</a>
+      &nbsp;
+      <a href="/register/">Register</a>
+    <% end %>
+  </span>
+  
+</header>
+
+<div class="site-content centered">
+
+  <div class="about">
+    <h2>nil</h2>
+  </div>
+
+  <div class="centered-box box">
+    <p>The requested content could not be found</p>
+  </div>
+
+</div>
+
+</body>
+</html>

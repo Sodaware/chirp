@@ -156,8 +156,8 @@ input[type='text'], input[type='password'] {
 
 .logged-in .site-content {
     float: left;
-    margin: 1% 0;
-    width: 74%;
+    margin: 1% 2%;
+    width: 70%;
 }
 
 .chirp-this {
@@ -168,4 +168,48 @@ input[type='text'], input[type='password'] {
     border: 1px solid #999;
     padding: 0.25em;
     width: 100%;
+}
+
+.logged-in .site-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.timeline .chirps {
+    list-style: none;
+    margin: 1em 0; padding: 0;
+}
+
+.timeline .chirps li {
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 1em;
+    background: #fafafa;
+}
+
+.timeline .chirps li .avatar {
+    float: left;
+    margin: 0 0.5em 0.5em 0;
+}
+
+.timeline .chirps li .username,
+.timeline .chirps li .text {
+    display: block;
+    margin-left: 3.5em;
+    margin-bottom: 0.25em;
+}
+
+.timeline .chirps li .meta {
+    clear: both;
+    background: #eee;
+    padding: 0.5em;
+    overflow: hidden;
+}
+
+.timeline .chirps li .meta .timestamp {
+    float: left;
+}
+
+.timeline .chirps li .meta .id {
+    float: right;
 }
