@@ -31,8 +31,8 @@
                      (list :chirp (car *chirps*)
                            :id id)))
 
-(restas:define-route add-chirp ("/chirps/" :method :post)
-  (push (hunchentoot:post-parameter "content") *chirps*)
+(restas:define-route chirps/add ("/chirps/" :method :post)
+  (push (create-chirp (current-user) (hunchentoot:post-parameter "content")) *chirps*)
   (redirect 'homepage))
 
 (restas:define-route chirps/list ("/chirps/list.json")

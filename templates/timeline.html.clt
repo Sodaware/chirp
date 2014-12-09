@@ -15,7 +15,7 @@
   <ul class="chirps">
   
     <% loop for chirp in (@ chirps) do %>
-      <li><%= chirp %></li>
+      <li><%= (chirp:chirp-text chirp) %></li>
     <% end %>
 
   </ul>

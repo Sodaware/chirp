@@ -5,7 +5,11 @@
            #:user-logged-in?
            #:current-user
            #:user-username
-           #:user-homepage))
+           #:user-homepage
+           #:chirp-text
+           #:chirp-id
+           #:chirp-user-id
+           #:chirp-created-at))
 
 (in-package #:chirp)
 
@@ -21,25 +25,32 @@
 ;; Models
 
 (defclass user ()
-  ((id :initform 0)
-   (username :initarg :username
-             :accessor user-username)
-   (password :initarg :password
-             :reader user-password)
-   (email :initform "")
-   (description :initform "")
-   (photo :initform "")
-   (homepage :initform ""
-             :accessor user-homepage)
-   (created-at :initform "")
-   (last-sign-in :initform "")))
+  ((id           :initarg :id         :reader user-id)
+   (username     :initarg :username   :accessor user-username)
+   (password     :initarg :password   :reader user-password)
+   (email        :initform ""         :accessor user-email)
+   (description  :initform ""         :accessor user-description)
+   (photo        :initform ""         :accessor user-photo)
+   (homepage     :initform ""         :accessor user-homepage)
+   (created-at   :initarg :created-at :accessor user-created-at)
+   (last-sign-in :initform 0          :accessor user-last-sign-in)))
 
 (defclass chirp ()
-  ((id :initform 0)
-   (text :initarg :text)
-   (created-at :initform "")
-   (user-id :initarg :user-id)))
+  ((id           :initarg :id         :reader chirp-id)
+   (text         :initarg :text       :reader chirp-text)
+   (created-at   :initarg :created-at :reader chirp-created-at)
+   (user-id      :initarg :user-id    :reader chirp-user-id)))
 
+
+;; Chirp functions
+
+(defun create-chirp (author text)
+  "Create a new Chirp instance for AUTHOR containing TEXT."
+  (make-instance 'chirp
+                 :id (+ 1 (length *chirps*))
+                 :text text
+                 :user-id (user-id author)
+                 :created-at (get-universal-time)))
 
 ;; User functions
 
@@ -53,8 +64,10 @@
 
 (defun register-user (username password)
   "Create a new user with USERNAME and hashed PASSWORD"
-  (let* ((hashed-password (hash-password password))
-         (user (make-instance 'user :username username :password hashed-password)))
+  (let ((user (make-instance 'user
+                             :id (+ 1 (length *users*))
+                             :username username
+                             :password (hash-password password))))
     (push user *users*)))
 
 (defun authorize-user (username password)
