@@ -75,6 +75,9 @@
           (chirp-render-template "templates/login.html.clt"
                                  (list :errors errors :username (hunchentoot:post-parameter "username")))))))
 
+(restas:define-route users/logout ("/logout/")
+  (setf (hunchentoot:session-value :username) nil)
+  (redirect 'homepage))
 
 (restas:define-route users/create ("/register/" :method :post)
   (let ((errors nil))
