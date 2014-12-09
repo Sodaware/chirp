@@ -121,11 +121,14 @@
       (read-sequence template template-file)
       (funcall (cl-template:compile-template template) params))))
 
-(defun chirp-render-view (name params)
-  (let ((view (concatenate 'string "templates/" name ".html.clt")))
-    (chirp-render-template "templates/layout.html.clt"
-                           (list :title "*chirp*"
-                                 :body (chirp-render-template view params)))))
+(defun chirp-render-view (name params &optional (layout "application"))
+  "Render the view NAME with PARAMS, and optionally override LAYOUT"
+  (let* ((view (concatenate 'string "templates/" name ".html.clt"))
+         (body (chirp-render-template view params))
+         (vars (append params (list :title "*chirp*" :body body))))
+    (chirp-render-template
+     (format nil "templates/layouts/~A.html.clt" layout)
+     vars)))
 
 ;; Allow restas to publish static assets under /assets/
 (restas:mount-module -assets- (#:restas.directory-publisher)

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <title><%= @ title %></title>
+  <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
+</head>
+<body class="<% if (chirp:user-logged-in?) %>logged-in<% end %>">
+
+<header class="site-header">
+  
+  <h1><a href="/">*chirp*</a></h1>
+  
+  <span class="identity">
+    <% if (chirp:user-logged-in?) %>
+      Logged in as <a href="/me/"><%= chirp:user-username (chirp:current-user) %></a>
+    <% else %>
+      <a href="/login/">Login</a>
+      &nbsp;
+      <a href="/register/">Register</a>
+    <% end %>
+  </span>
+  
+</header>
+
+<div class="site-container">
+
+  <div class="site-navigation sidebar">
+
+    <% if (chirp:user-logged-in?) %>
+    <% else %>
+      
+      <div class="box logged-out">
+        <header>
+          <h3>Your Profile</h3>
+        </header>
+        <p>
+          <a href="/login">Login</a> or <a href="/register">register</a> to join in.
+        </p>
+      </div>
+      
+    <% end %>
+
+    <div class="box profile">
+      <header>
+        <h3>@<%= chirp:user-username (chirp:current-user) %></h3>
+      </header>
+      
+      <span class="image"><span class="empty"></span></span>
+
+      <% unless (string= "" (chirp:user-description (chirp:current-user))) %>
+        <span class="description">
+          <%= chirp:user-description (chirp:current-user) %>
+        </span>
+      <% end %>
+      
+      <br />
+      
+      <% unless (string= "" (chirp:user-homepage (chirp:current-user))) %>
+        <span class="homepage">
+          <a href="<%= chirp:user-homepage (chirp:current-user) %>">
+            @<%= chirp:user-username (chirp:current-user) %>'s Homepage
+          </a>  
+        </span>
+      <% end %>
+      
+    </div>
+
+  </div>
+
+  <div class="site-content">
+    <%= @ body %>
+  </div>
+
+</div>
+  
+</body>
+</html>
