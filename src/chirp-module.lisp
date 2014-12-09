@@ -57,8 +57,14 @@
                  :created-at (get-universal-time)))
 
 (defun chirp-author (chirp)
-  "Get the user object for CHIRP"
+  "Get the user object that created CHIRP."
   (get-user-by-id (chirp-user-id chirp)))
+
+(defun get-user-chirps (user)
+  "Get all chirps that belong to USER."
+  (remove-if-not #'(lambda (chirp)
+                     (eq (user-id user) (chirp-user-id chirp)))
+                 *chirps*))
 
 ;; User functions
 
@@ -72,11 +78,11 @@
 
 (defun register-user (username password)
   "Create a new user with USERNAME and hashed PASSWORD"
-  (let ((user (make-instance 'user
-                             :id (+ 1 (length *users*))
-                             :username username
-                             :password (hash-password password))))
-    (push user *users*)))
+  (push (make-instance 'user
+                       :id (+ 1 (length *users*))
+                       :username username
+                       :password (hash-password password))
+        *users*))
 
 (defun authorize-user (username password)
   "Check that USERNAME can login with PASSWORD."

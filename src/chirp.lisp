@@ -45,7 +45,7 @@
 (restas:define-route users/show ("/profiles/:username/")
   (let ((user (username-exists? username)))
     (if user
-        (chirp-render-view "users/show" (list :user user))
+        (chirp-render-view "users/show" (list :user user :chirps (get-user-chirps user)) "profile")
         (chirp-render-template "templates/404.html.clt" nil))))
 
 (restas:define-route users/self ("/me/")

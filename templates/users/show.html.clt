@@ -1,1 +1,27 @@
 Profile for user
+
+<div class="timeline">
+
+  <ul class="chirps">
+  
+    <% loop for chirp in (@ chirps) do %>
+      <li>
+        <span class="avatar">
+          <img src="https://secure.gravatar.com/avatar/bb4f45f70feba1d776d4a8f60e7efd0f.jpg?s=32" />
+        </span>
+        <span class="username">
+          <a href="<%= chirp:user-profile-page-path (chirp:chirp-author chirp) %>">
+            @<%= chirp:user-username (chirp:chirp-author chirp) %>
+          </a>
+        </span>
+        <span class="text"><%= chirp:chirp-text chirp %></span>
+        <div class="meta">
+          <span class="timestamp"><%= format nil "~a" (chirp:chirp-created-at chirp) %></span>
+          <span class="id">#<%= format nil "~a" (chirp:chirp-id chirp) %></span>
+        </div>
+      </li>
+    <% end %>
+
+  </ul>
+
+</div>
