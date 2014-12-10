@@ -19,7 +19,7 @@
       (progn
         (chirp-render-view "timeline" (list :user (current-user)
                                             :chirps *chirps*)))
-      (chirp-render-template "templates/homepage.html.clt" nil)))
+      (chirp-render-view "homepage" nil "no-sidebar")))
 
 ;; Display a list of ALL chirps, not just from people the current user is
 ;; following
@@ -53,11 +53,8 @@
       (redirect "/profiles/sodaware/")
       (redirect 'users/login)))
 
-(restas:define-route users/register ("/register/" :method :get)
-  (chirp-render-template "templates/register.html.clt" (list :errors nil :username nil)))
-
 (restas:define-route users/login ("/login/" :method :get)
-  (chirp-render-template "templates/login.html.clt" (list :errors nil :username nil)))
+  (chirp-render-view "login" (list :errors nil :username nil) "no-sidebar"))
 
 (restas:define-route users/login-check ("/login/" :method :post)
   (let ((errors nil)
@@ -72,12 +69,16 @@
           (redirect 'homepage))
         (progn
           (push "Username/password incorrect" errors)
-          (chirp-render-template "templates/login.html.clt"
-                                 (list :errors errors :username (hunchentoot:post-parameter "username")))))))
+          (chirp-render-view "login"
+                             (list :errors errors :username (hunchentoot:post-parameter "username"))
+                             "no-sidebar")))))
 
 (restas:define-route users/logout ("/logout/")
   (setf (hunchentoot:session-value :username) nil)
   (redirect 'homepage))
+
+(restas:define-route users/register ("/register/" :method :get)
+  (chirp-render-view "register" (list :errors nil :username nil) "no-sidebar"))
 
 (restas:define-route users/create ("/register/" :method :post)
   (let ((errors nil))
@@ -95,5 +96,6 @@
           (register-user (hunchentoot:post-parameter "username")
                          (hunchentoot:post-parameter "password"))
           (redirect 'homepage))
-        (chirp-render-template "templates/register.html.clt"
-                               (list :errors errors :username (hunchentoot:post-parameter "username"))))))
+        (chirp-render-view "register"
+                           (list :errors errors :username (hunchentoot:post-parameter "username"))
+                           "no-sidebar"))))

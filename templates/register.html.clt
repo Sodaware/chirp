@@ -1,75 +1,43 @@
-<!doctype html>
-<html>
-<head>
-  <title>register account -- *chirp*</title>
-  <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
-</head>
-
-<body class="homepage">
-
-<header class="site-header">
-  
-  <h1><a href="/">*chirp*</a></h1>
-  
-  <span class="identity">
-    <a href="/login/">Login</a>
-    &nbsp;
-    <a href="/register/">Register</a>
-  </span>
-  
-</header>
-
-<div class="site-content centered">
-
-  <div class="about">
-    <h2>*chirp* is a social network powered by Common Lisp</h2>
-  </div>
-
-  <div class="register-box centered-box box">
-    <header>
-      <h3>Register</h3>
-    </header>
-
-    <% when (@ errors) %>
-      <div class="errors">
-        <ul>
-          <% loop for error in (@ errors) do %>
-            <li><%= error %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% ) %>
-    
-    <form action="/register/" method="POST">
-      
-      <dl>
-        <dt><label>Username</label></dt>
-        <dd><input type="text" name="username" /></dd>
-        
-        <dt><label>Password</label></dt>
-        <dd><input type="password" name="password" /></dd>
-
-        <dt><label><em>Confirm</em></label></dt>
-        <dd><input type="password" name="confirm" /></dd>
-      </dl>
-
-      <p class="button-container">
-        <input type="submit" class="button submit" value="Register">
-      </p>
-      
-    </form>
-    
-  </div>
-
-  <p class="no-account">
-    Have an account? <a href="/login/">Login!</a>
-  </p>
-
+<div class="about">
+  <h2>*chirp* is a social network powered by Common Lisp</h2>
 </div>
 
-<footer class="site-footer">
-  <a href="http://github.com/sodaware/chirp/">View source on GitHub</a>
-</footer>
+<div class="register-box centered-box box">
+  <header>
+    <h3>Register</h3>
+  </header>
 
-</body>
-</html>
+  <% when (@ errors) %>
+    <div class="errors">
+      <ul>
+        <% loop for error in (@ errors) do %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% ) %>
+  
+  <form action="/register/" method="POST">
+    
+    <dl>
+      <dt><label>Username</label></dt>
+      <dd><input type="text" name="username" /></dd>
+      
+      <dt><label>Password</label></dt>
+      <dd><input type="password" name="password" /></dd>
+
+      <dt><label><em>Confirm</em></label></dt>
+      <dd><input type="password" name="confirm" /></dd>
+    </dl>
+
+    <p class="button-container">
+      <input type="submit" class="button submit" value="Register">
+    </p>
+    
+  </form>
+  
+</div>
+
+<p class="no-account">
+  Have an account? <a href="/login/">Login!</a>
+</p>

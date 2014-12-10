@@ -1,62 +1,31 @@
-<!doctype html>
-<html>
-<head>
-  <title>*chirp*</title>
-  <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
-</head>
 
-<body class="homepage">
-
-<header class="site-header">
-  
-  <h1><a href="/">*chirp*</a></h1>
-  
-  <span class="identity">
-    <a href="/login/">Login</a>
-    &nbsp;
-    <a href="/register/">Register</a>
-  </span>
-  
-</header>
-
-<div class="site-content centered">
-
-  <div class="about">
-    <h2>*chirp* is a social network powered by Common Lisp</h2>
-  </div>
-
-  <div class="login-box centered-box box">
-    <header>
-      <h3>Login</h3>
-    </header>
-
-    <form action="/login/" method="POST">
-      
-      <dl>
-        <dt><label>Username</label></dt>
-        <dd><input type="text" name="username" /></dd>
-        
-        <dt><label>Password</label></dt>
-        <dd><input type="password" name="password" /></dd>
-      </dl>
-
-      <p class="button-container">
-        <input type="submit" class="button submit" value="login">
-      </p>
-      
-    </form>
-    
-  </div>
-
-  <p class="no-account">
-    No account? <a href="/register/">Create one!</a>
-  </p>
-
+<div class="about">
+  <h2>*chirp* is a social network powered by Common Lisp</h2>
 </div>
 
-<footer class="site-footer">
-  <a href="http://github.com/sodaware/chirp/">View source on GitHub</a>
-</footer>
+<div class="login-box centered-box box">
+  <header>
+    <h3>Login</h3>
+  </header>
 
-</body>
-</html>
+  <form action="/login/" method="POST">
+    
+    <dl>
+      <dt><label>Username</label></dt>
+      <dd><input type="text" name="username" /></dd>
+      
+      <dt><label>Password</label></dt>
+      <dd><input type="password" name="password" /></dd>
+    </dl>
+
+    <p class="button-container">
+      <input type="submit" class="button submit" value="login">
+    </p>
+    
+  </form>
+  
+</div>
+
+<p class="no-account">
+  No account? <a href="/register/">Create one!</a>
+</p>

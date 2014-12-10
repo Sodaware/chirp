@@ -1,0 +1,37 @@
+
+<!doctype html>
+<html>
+<head>
+  <title><%= @ title %></title>
+  <link rel="stylesheet" href="/assets/css/chirp-framework.css" />
+</head>
+<body class="<% if (chirp:user-logged-in?) %>logged-in<% end %>">
+
+<header class="site-header">
+  
+  <h1><a href="/">*chirp*</a></h1>
+  
+  <span class="identity">
+    <% if (chirp:user-logged-in?) %>
+      Logged in as <a href="/me/"><%= chirp:user-username (chirp:current-user) %></a>
+      &nbsp;
+      <a href="/logout/">Logout</a>
+    <% else %>
+      <a href="/login/">Login</a>
+      &nbsp;
+      <a href="/register/">Register</a>
+    <% end %>
+  </span>
+  
+</header>
+
+<div class="site-content centered">
+  <%= @ body %>
+</div>
+  
+<footer class="site-footer">
+  <a href="http://github.com/sodaware/chirp/">View source on GitHub</a>
+</footer>
+
+</body>
+</html>
