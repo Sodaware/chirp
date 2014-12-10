@@ -27,7 +27,11 @@
         <span class="text"><%= chirp:chirp-text chirp %></span>
         <div class="meta">
           <span class="timestamp"><%= format nil "~a" (chirp:chirp-created-at chirp) %></span>
-          <span class="id">#<%= format nil "~a" (chirp:chirp-id chirp) %></span>
+          <span class="id">
+            <a href="<%= chirp:chirp-page-path chirp %>">
+              #<%= format nil "~s" (chirp:chirp-id chirp) %>
+            </a>
+          </span>
         </div>
       </li>
     <% end %>

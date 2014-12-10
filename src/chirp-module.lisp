@@ -1,6 +1,6 @@
 (restas:define-module
     #:chirp
-    (:use :cl :restas)
+  (:use :cl :restas)
   (:export #:chirp-render-view
            #:user-logged-in?
            #:current-user
@@ -13,7 +13,8 @@
            #:chirp-user-id
            #:chirp-created-at
            #:chirp-author
-           #:user-profile-page-path))
+           #:user-profile-page-path
+           #:chirp-page-path))
 
 (in-package #:chirp)
 
@@ -110,6 +111,10 @@
 
 (defun user-profile-page-path (user)
   (format nil "/profiles/~(~a~)/" (string-downcase (user-username user))))
+
+(defun chirp-page-path (chirp)
+  "Get the full path to view CHIRP."
+  (format nil "/chirps/~a/" (chirp-id chirp)))
 
 
 ;; Helper functions
