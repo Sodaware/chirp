@@ -214,3 +214,20 @@ input[type='text'], input[type='password'] {
 .timeline .chirps li .meta .id {
     float: right;
 }
+
+.site-footer {
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+    margin-top: 2em;
+    padding: 0.5em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .site-footer a {
+        color: #369;
+        text-decoration: none;
+        border-bottom: 1px solid #369;
+    }
+    

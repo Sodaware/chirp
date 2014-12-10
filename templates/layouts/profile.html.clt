@@ -73,5 +73,9 @@
 
 </div>
   
+<footer class="site-footer">
+  <a href="http://github.com/sodaware/chirp/">View source on GitHub</a>
+</footer>
+
 </body>
 </html>
