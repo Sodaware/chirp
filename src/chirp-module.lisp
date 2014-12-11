@@ -127,7 +127,9 @@
     (ironclad:ascii-string-to-byte-array password))))
 
 (defun render-partial (name &optional params)
-  (render-template name params))
+  (render-template
+   (format nil "templates/~A.html.clt" name)
+   params))
 
 (defun render-view (name params &optional (layout "application"))
   "Render the view NAME with PARAMS, and optionally override LAYOUT"

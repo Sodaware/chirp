@@ -15,25 +15,7 @@
   <ul class="chirps">
   
     <% loop for chirp in (@ chirps) do %>
-      <li>
-        <span class="avatar">
-          <img src="https://secure.gravatar.com/avatar/bb4f45f70feba1d776d4a8f60e7efd0f.jpg?s=32" />
-        </span>
-        <span class="username">
-          <a href="<%= chirp:user-profile-page-path (chirp:chirp-author chirp) %>">
-            @<%= chirp:user-username (chirp:chirp-author chirp) %>
-          </a>
-        </span>
-        <span class="text"><%= chirp:chirp-text chirp %></span>
-        <div class="meta">
-          <span class="timestamp"><%= format nil "~a" (chirp:chirp-created-at chirp) %></span>
-          <span class="id">
-            <a href="<%= chirp:chirp-page-path chirp %>">
-              #<%= format nil "~s" (chirp:chirp-id chirp) %>
-            </a>
-          </span>
-        </div>
-      </li>
+      <%= (chirp::render-partial "chirps/_single" (list :chirp chirp)) %>
     <% end %>
 
   </ul>
