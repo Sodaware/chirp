@@ -17,19 +17,19 @@
 (restas:define-route homepage ("")
   (if (user-logged-in?)
       (progn
-        (chirp-render-view "timeline" (list :user (current-user)
-                                            :chirps *chirps*)))
-      (chirp-render-view "homepage" nil "no-sidebar")))
+        (render-view "timeline" (list :user (current-user)
+                                      :chirps *chirps*)))
+      (render-view "homepage" nil "no-sidebar")))
 
 ;; Display a list of ALL chirps, not just from people the current user is
 ;; following
 (restas:define-route chirps/timeline ("/chirps/" :method :get)
-  (chirp-render-view "timeline" (list :chirps *chirps*)))
+  (render-view "timeline" (list :chirps *chirps*)))
 
 (restas:define-route chirps/show ("/chirps/:id/")
-  (chirp-render-view "chirps/show"
-                     (list :chirp (car *chirps*)
-                           :id id)))
+  (render-view "chirps/show"
+               (list :chirp (car *chirps*)
+                     :id id)))
 
 (restas:define-route chirps/add ("/chirps/" :method :post)
   (push (create-chirp (current-user) (hunchentoot:post-parameter "content")) *chirps*)
@@ -45,8 +45,8 @@
 (restas:define-route users/show ("/profiles/:username/")
   (let ((user (username-exists? username)))
     (if user
-        (chirp-render-view "users/show" (list :user user :chirps (get-user-chirps user)) "profile")
-        (chirp-render-template "templates/404.html.clt" nil))))
+        (render-view "users/show" (list :user user :chirps (get-user-chirps user)) "profile")
+        (render-template "templates/404.html.clt" nil))))
 
 (restas:define-route users/self ("/me/")
   (if (user-logged-in?)
@@ -54,7 +54,7 @@
       (redirect 'users/login)))
 
 (restas:define-route users/login ("/login/" :method :get)
-  (chirp-render-view "login" (list :errors nil :username nil) "no-sidebar"))
+  (render-view "login" (list :errors nil :username nil) "no-sidebar"))
 
 (restas:define-route users/login-check ("/login/" :method :post)
   (let ((errors nil)
@@ -69,16 +69,16 @@
           (redirect 'homepage))
         (progn
           (push "Username/password incorrect" errors)
-          (chirp-render-view "login"
-                             (list :errors errors :username (hunchentoot:post-parameter "username"))
-                             "no-sidebar")))))
+          (render-view "login"
+                       (list :errors errors :username (hunchentoot:post-parameter "username"))
+                       "no-sidebar")))))
 
 (restas:define-route users/logout ("/logout/")
   (setf (hunchentoot:session-value :username) nil)
   (redirect 'homepage))
 
 (restas:define-route users/register ("/register/" :method :get)
-  (chirp-render-view "register" (list :errors nil :username nil) "no-sidebar"))
+  (render-view "register" (list :errors nil :username nil) "no-sidebar"))
 
 (restas:define-route users/create ("/register/" :method :post)
   (let ((errors nil))
@@ -96,6 +96,6 @@
           (register-user (hunchentoot:post-parameter "username")
                          (hunchentoot:post-parameter "password"))
           (redirect 'homepage))
-        (chirp-render-view "register"
-                           (list :errors errors :username (hunchentoot:post-parameter "username"))
-                           "no-sidebar"))))
+        (render-view "register"
+                     (list :errors errors :username (hunchentoot:post-parameter "username"))
+                     "no-sidebar"))))

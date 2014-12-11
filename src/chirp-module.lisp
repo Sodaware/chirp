@@ -1,8 +1,7 @@
 (restas:define-module
     #:chirp
   (:use :cl :restas)
-  (:export #:chirp-render-view
-           #:user-logged-in?
+  (:export #:user-logged-in?
            #:current-user
            #:user-username
            #:user-homepage
@@ -14,7 +13,8 @@
            #:chirp-created-at
            #:chirp-author
            #:user-profile-page-path
-           #:chirp-page-path))
+           #:chirp-page-path
+           #:render-partial))
 
 (in-package #:chirp)
 
@@ -126,20 +126,24 @@
     :sha256 
     (ironclad:ascii-string-to-byte-array password))))
 
-(defun chirp-render-template (name params)
+(defun render-partial (name &optional params)
+  (render-template name params))
+
+(defun render-view (name params &optional (layout "application"))
+  "Render the view NAME with PARAMS, and optionally override LAYOUT"
+  (let* ((view (concatenate 'string "templates/" name ".html.clt"))
+         (body (render-template view params))
+         (vars (append params (list :title "*chirp*" :body body))))
+    (render-template
+     (format nil "templates/layouts/~A.html.clt" layout)
+     vars)))
+
+(defun render-template (name params)
   (with-open-file (template-file name)
     (let ((template (make-string (file-length template-file))))
       (read-sequence template template-file)
       (funcall (cl-template:compile-template template) params))))
 
-(defun chirp-render-view (name params &optional (layout "application"))
-  "Render the view NAME with PARAMS, and optionally override LAYOUT"
-  (let* ((view (concatenate 'string "templates/" name ".html.clt"))
-         (body (chirp-render-template view params))
-         (vars (append params (list :title "*chirp*" :body body))))
-    (chirp-render-template
-     (format nil "templates/layouts/~A.html.clt" layout)
-     vars)))
 
 ;; Allow restas to publish static assets under /assets/
 (restas:mount-module -assets- (#:restas.directory-publisher)
