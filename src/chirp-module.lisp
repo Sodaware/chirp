@@ -18,7 +18,10 @@
 
 (in-package #:chirp)
 
-;; Configuration
+
+;; ----------------------------------------------------------------------
+;; -- Configuration
+;; ----------------------------------------------------------------------
 
 (defparameter *template-directory*
   (merge-pathnames #P"templates/" chirp-config:*base-directory*))
@@ -27,7 +30,9 @@
   (merge-pathnames #P"assets/" chirp-config:*base-directory*))
 
 
-;; Models
+;; ----------------------------------------------------------------------
+;; -- Models
+;; ----------------------------------------------------------------------
 
 (defclass user ()
   ((id           :initarg :id         :reader user-id)
@@ -47,7 +52,9 @@
    (user-id      :initarg :user-id    :reader chirp-user-id)))
 
 
-;; Chirp functions
+;; ----------------------------------------------------------------------
+;; -- "Chirp" object functions
+;; ----------------------------------------------------------------------
 
 (defun create-chirp (author text)
   "Create a new Chirp instance for AUTHOR containing TEXT."
@@ -67,7 +74,10 @@
                      (eq (user-id user) (chirp-user-id chirp)))
                  *chirps*))
 
-;; User functions
+
+;; ----------------------------------------------------------------------
+;; -- User functions
+;; ----------------------------------------------------------------------
 
 (defun user-logged-in? ()
   "Check if a user is logged in."
@@ -107,9 +117,20 @@
   (string= (string-downcase username) (string-downcase value)))
 
 
-;; Path helpers
+(defun hash-password (password)
+  "Generates a hash for PASSWORD."
+  (ironclad:byte-array-to-hex-string 
+   (ironclad:digest-sequence 
+    :sha256 
+    (ironclad:ascii-string-to-byte-array password))))
+
+
+;; ----------------------------------------------------------------------
+;; -- Path Helpers
+;; ----------------------------------------------------------------------
 
 (defun user-profile-page-path (user)
+  "Get the full path to view USER."
   (format nil "/profiles/~(~a~)/" (string-downcase (user-username user))))
 
 (defun chirp-page-path (chirp)
@@ -117,14 +138,9 @@
   (format nil "/chirps/~a/" (chirp-id chirp)))
 
 
-;; Helper functions
-
-(defun hash-password (password)
-  "Generates a hash for PASSWORD."
-  (ironclad:byte-array-to-hex-string 
-   (ironclad:digest-sequence 
-    :sha256 
-    (ironclad:ascii-string-to-byte-array password))))
+;; ----------------------------------------------------------------------
+;; -- Rendering Helpers
+;; ----------------------------------------------------------------------
 
 (defun render-partial (name &optional params)
   (render-template
