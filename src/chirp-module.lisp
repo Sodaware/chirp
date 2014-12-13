@@ -156,7 +156,8 @@
      (format nil "templates/layouts/~A.html.clt" layout)
      vars)))
 
-(defun render-template (name params)
+(defun render-template (name &optional params)
+  "Render the template NAME with optional PARAMS and return as a string."
   (with-open-file (template-file name)
     (let ((template (make-string (file-length template-file))))
       (read-sequence template template-file)
