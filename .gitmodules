@@ -1,3 +1,0 @@
-[submodule "vendor/cl-template"]
-	path = vendor/cl-template
-	url = git@github.com:alpha123/cl-template.git
